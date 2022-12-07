@@ -15,6 +15,8 @@
     --prod-color4: #b08968ec;
     --prod-color5: #7f5539ec;
     --prod-color6: #9c6644ec;
+    --nav-color: rgba(0, 0, 0, 0.5);
+    --nav-colord: rgba(0, 0, 0, 0.8);
 }
 
 *,
@@ -52,7 +54,7 @@ header{
 }
 
 .nav-link, .navbar-brand {
-    color: var(--brown);
+    color: var(--nav-color);
 }
 
 .nav-link:hover {
@@ -131,12 +133,21 @@ h2 {
 /* ========================================================================================================= */
 /* Products */
 /* ========================================================================================================= */
-#products {
-    min-width: 100wv;
+.perfumes {
+    background-color: var(--prod-color1);
+    min-width: 100vw;
     height: 100vh;
     display: flex;
-    position: relative;
-    animation: slide 30s linear infinite;
+    animation: slide 50s linear infinite;
+}
+#stopSlide {
+    animation: none;
+}
+
+/* #products {
+    min-width: 100wv;
+    height: 100vh;
+    
 }
 
 .prod {
@@ -338,7 +349,7 @@ h2 {
 .atc11 {
     border-color: var(--prod-color2);
     color: var(--prod-color2);
-}
+} */
 /* ========================================================================================================= */
 /* Checkout */
 /* ========================================================================================================= */
@@ -362,24 +373,48 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--prod-color1);
+    color: var(--prod-color4);
 }
 
 .tbl {
     width: 100%;
+    color: var(--prod-color3);
+}
+
+.table, .table button {
+    color: var(--prod-color4);
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>td>button  {
+    color: var(--prod-color6); 
+  }
+
+.table button {
+    background: none;
+    border: none;
+    
+}
+
+#admin>button {
+    background: none;
+    border: none;
+    color: var(--prod-color6);
 }
  /* =============================================================================================== */
 @keyframes linkHover {
     0% {
         scale: 1;
-        color: var(--dark-gray);
+        color: var(--nav-color);
     }
     50%{
         scale: 1.1;
-        color: var(--dark-brown);
+        color: var(--nav-colord);
     }
     100%{
         scale: 1.03;
-        color: var(--dark-brown);
+        color: var(--nav-colord);
     }
 }
 
