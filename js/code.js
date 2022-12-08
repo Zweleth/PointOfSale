@@ -1,3 +1,6 @@
+let cart = [];
+localStorage.setItem('cart', JSON.stringify(cart));
+
 let perfumes = [
     {
       id: 1,
@@ -101,3 +104,6 @@ let perfumes = [
   ];
 
 localStorage.setItem('data', JSON.stringify(perfumes));
+
+// ===================================================================================================================================
+

@@ -14,9 +14,9 @@ function populateTable() {
                     <td>${perfumes[i].name}</td>
                     <td>${perfumes[i].gender}</td>
                     <td>${perfumes[i].price}</td>
-                    <td><button><i class="fa-solid fa-pen-to-square"></i></button></td>
-                    <td><button><i class="fa-solid fa-trash"></i></button></td>
-                </tr>
+                    <td><button class="edit" id="${i}"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                    <td><button class="delete" id="${perfumes[i].id}"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
             `;
     }
   });
@@ -27,25 +27,66 @@ function populateTable() {
 
 populateTable();
 
+document.querySelector('.pop-up').id = 'hideModal';
+function showModal() {
+  if (document.querySelector('.pop-up').id != 'showModal') {
+    document.querySelector('.pop-up').id = 'showModal';
+  }
+   
+  // let newPerfume = {};
+  // perfumes.push(newPerfume);
+}
 
-function addPerfume() {
-  let newPerfume = {};
-  perfumes.push(newPerfume);
+let btnAddItem = document.querySelector(".addItem");
+btnAddItem.addEventListener("click", addItemClicked);
+
+let btnCancel = document.querySelector(".cancel");
+btnCancel.addEventListener("click", hideModal);
+
+function hideModal() {
+  document.querySelector('.pop-up').id = 'hideModal';
 }
 
 let btnAddPerfume = document.querySelector(".btnAdd");
-btnAddPerfume.addEventListener("click", addPerfume);
+btnAddPerfume.addEventListener("click", showModal);
 
+let btnDelete = document.querySelectorAll('.delete')
+btnDelete.forEach(btn => {
+  btn.addEventListener('click', () => {
+    let x = (btn.id);
+    deletePerfume(x)
+  
+  })
+})
 
-
-function showProducts() {
-    
-    
-    // perfumes.forEach((i) => {
-    //     // console.log(`${i}: ${perfumes[i]}`);
-    //     display.innerHTML += `
-    //     <h5>Product name</h5>
-    //           `;
-    //   }
-    // );
+function deletePerfume(index) {
+  perfumes.splice((index-1),1)
+  for(i=0; i< perfumes.length; i++) {
+    perfumes[i].id = eval(`${[i]} + 1`);
   }
+  localStorage.setItem('data', JSON.stringify(perfumes));
+  document.location.reload();
+}
+
+
+function addNewPerfume() {
+  let newPerfume = {
+  id: perfumes.length+1,
+  name: document.querySelector('.perfName').value,
+  gender: document.querySelector('.perfGender').value,
+  price: parseInt(document.querySelector('.perfPrice').value),
+  image_link: document.querySelector('.perfImage').value,
+  description:
+    document.querySelector('.perfDescr').value,
+}
+  perfumes.push(newPerfume);
+  localStorage.setItem('data', JSON.stringify(perfumes));
+  document.location.reload();
+  populateTable()
+}
+
+function addItemClicked() {
+  hideModal();
+  addNewPerfume();
+  
+}

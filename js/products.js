@@ -1,4 +1,5 @@
 let perfumes = JSON.parse(localStorage.getItem("data"))
+let cartItems = JSON.parse(localStorage.getItem("cart"))
   
 
     let colors = [
@@ -205,7 +206,7 @@ let perfumes = JSON.parse(localStorage.getItem("data"))
                 <h6 style="margin-top: 1rem;" >Price: R ${perfumes[i].price}</h6>
                 <h6 style="margin-top: 1rem;">${perfumes[i].description}</h6>
                 <div class="btnAddToCart style="width: 100%; height: 4rem;">
-                    <button class="btn addtocart atc1" style="margin-top: 3.5rem;
+                    <button class="btn" id="${perfumes[i].id}"style="margin-top: 3.5rem;
                     width: 10rem;
                     height: 3rem;
                     border: none;
@@ -213,12 +214,12 @@ let perfumes = JSON.parse(localStorage.getItem("data"))
                     color: ${colors[i].color}
                     border-color ${colors[i].color};">Add to cart</button>
                 </div>
-          </div>
+            </div>
                   `;
           }
           
         });
-        for (let x=0; x<3; x++) {
+        for (let i=0; i<3; i++) {
             products.innerHTML += `
             <div class="prod" style="min-width: 33.33vw;
             height: 100%;
@@ -227,34 +228,34 @@ let perfumes = JSON.parse(localStorage.getItem("data"))
             justify-content: center;
             align-items: center;
             padding-top: 5rem;
-            padding-bottom: 1rem
-            padding-left: 2rem
+            padding-bottom: 1rem;
             padding-right: 2rem;
-            background-color: ${colors[x].bgColor};
-            color: ${colors[x].color}">
-                <h5 style="margin-bottom: 2rem; ">${perfumes[x].name}</h5>
-                <div class="img" style="background-image: url(${perfumes[x].image_link}); width: 100%;
+            padding-left: 2rem;
+            background-color: ${colors[i].bgColor};
+            color: ${colors[i].color}">
+                <h5 style="margin-bottom: 2rem; ">${perfumes[i].name}</h5>
+                <div class="img" style="background-image: url(${perfumes[i].image_link}); width: 100%;
                 height: 25rem;
                 
                 background-position: center;
                 background-size: 80%;
                 background-repeat: no-repeat;
-                display: flex;
-                align-items: center" >
-                    <img src="${perfumes[x].image_link}" style="width:90%"; height: 20rem;>
+                display:flex;
+                align-items:center">
+                    <img src="${perfumes[i].image_link}" style="width:90%"; height: 20rem;>
                 </div>
-                <h6 style="margin-top: 1rem;" >Price: R ${perfumes[x].price}</h6>
-                <h6 style="margin-top: 1rem;">${perfumes[x].description}</h6>
-                <div class="btnAddToCart" style="width: 100% height:4rem">
-                    <button class="btn addtocart" style="margin-top: 3.5rem;
+                <h6 style="margin-top: 1rem;" >Price: R ${perfumes[i].price}</h6>
+                <h6 style="margin-top: 1rem;">${perfumes[i].description}</h6>
+                <div class="btnAddToCart style="width: 100%; height: 4rem;">
+                    <button class="btn" id="${perfumes[i].id}"style="margin-top: 3.5rem;
                     width: 10rem;
                     height: 3rem;
                     border: none;
                     border: 2px solid;
-                    color: ${colors[x].color}
-                    border-color ${colors[x].color};">Add to cart</button>
+                    color: ${colors[i].color}
+                    border-color ${colors[i].color};">Add to cart</button>
                 </div>
-          </div>
+            </div>
                   `;
           }
       }
@@ -281,3 +282,20 @@ let perfumes = JSON.parse(localStorage.getItem("data"))
     function resumeSlide() {
         document.querySelector('.perfumes').id = ''
     }
+
+   let btnAddItem = document.querySelectorAll('.btn')
+    btnAddItem.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let x = parseInt(btn.id)
+            addItemToCart();  
+        // 
+    })
+   })
+
+    function addItemToCart(i) {
+        cartItems.push([perfumes[i]])
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+   }
+   
+    // ====================================================================================================
+

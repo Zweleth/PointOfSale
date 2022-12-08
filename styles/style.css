@@ -15,6 +15,7 @@
     --prod-color4: #b08968ec;
     --prod-color5: #7f5539ec;
     --prod-color6: #9c6644ec;
+    --blur: #e6ccb261;
     --nav-color: rgba(0, 0, 0, 0.5);
     --nav-colord: rgba(0, 0, 0, 0.8);
 }
@@ -139,9 +140,19 @@ h2 {
     height: 100vh;
     display: flex;
     animation: slide 50s linear infinite;
+    
 }
 #stopSlide {
+    animation-play-state: paused;
+}
+
+.btn:hover {
     animation: none;
+    animation: buttonHover 0.6s ease-in-out forwards;
+}
+
+.slider, .perfumes {
+    background: none;
 }
 
 /* #products {
@@ -369,7 +380,7 @@ h2 {
 /* Admin */
 /* ========================================================================================================= */
 #admin {
-    padding: 4rem;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -379,6 +390,7 @@ h2 {
 
 .tbl {
     width: 100%;
+    padding: 4rem;
     color: var(--prod-color3);
 }
 
@@ -401,6 +413,96 @@ h2 {
     background: none;
     border: none;
     color: var(--prod-color6);
+}
+
+#showModal {
+    display: flex;
+}
+#hideModal {
+    display: none;
+}
+
+.pop-up {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    z-index: +5;
+    background-color: var(--blur);
+    padding: 2rem;
+}
+
+.popForm {
+    width: 40vw;
+    height: 92vh;
+    background-color: var(--prod-color2);
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.popForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-control:focus {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--prod-color4);
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.form-control {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--prod-color4);
+    outline: none;
+    border-radius: 0;
+    color: var(--prod-color4);
+    width: 100%;
+}
+
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.buttons button:hover {
+    animation: buttonHover 0.6s ease-in-out forwards;
+}
+
+.buttons button {
+    background: none;
+    border: none; 
+    width: 6rem;
+    height: 2.2rem;
+    border: 2px solid var(--prod-color4);
+    border-radius: 0.4rem;
+    color: var(--prod-color4);
+}
+
+.cancel {
+    margin-left: 1rem;
+
+}
+
+.addItem {
+    margin-left: 1rem;
 }
  /* =============================================================================================== */
 @keyframes linkHover {
