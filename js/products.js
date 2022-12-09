@@ -287,14 +287,21 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
     btnAddItem.forEach(btn => {
         btn.addEventListener('click', () => {
             let x = parseInt(btn.id)
-            addItemToCart();  
+            addItemToCart(x-1);  
         // 
     })
    })
 
     function addItemToCart(i) {
-        cartItems.push([perfumes[i]])
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        if (cartItems.includes(perfumes[i])) {
+
+        }
+        else {
+            perfumes[i].qty= 1;
+            cartItems.push(perfumes[i])
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            alert(perfumes[i])
+        }
    }
    
     // ====================================================================================================
