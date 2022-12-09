@@ -300,7 +300,6 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
             perfumes[i].qty= 1;
             cartItems.push(perfumes[i])
             localStorage.setItem('cart', JSON.stringify(cartItems));
-            alert(perfumes[i])
         }
    }
    

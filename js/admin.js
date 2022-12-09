@@ -98,12 +98,11 @@ function addItemClicked() {
   
 }
 
+let updateIndex = 0;
 
-
-let btnAddItemEdit = document.querySelector(".addItemEdit");
-btnAddItemEdit.addEventListener("click", () => {
-  //editPerfume(updateIndex-1);
-  alert(updateIndex)
+let AddItemEdit = document.querySelector(".addItemEdit");
+AddItemEdit.addEventListener("click", () => {
+  editPerfume(updateIndex);
   closeEditModal();
   
   
@@ -118,9 +117,9 @@ closeModalEdit.addEventListener("click", () => {
 let btnEditPerfume = document.querySelectorAll('.edit')
 btnEditPerfume.forEach(btn => {
   btn.addEventListener('click', () => {
-    populateModal(btn.id-1);
+    populateModal(btn.id);
     showEditModal();
-    let updateIndex = 0;
+   
     updateIndex = parseInt(btn.id);
     
   })
@@ -132,8 +131,8 @@ function editPerfume(index) {
   perfumes[index].price = parseFloat(document.querySelector('.perfPriceEdit').value);
   perfumes[index].image_link = document.querySelector('.perfImageLinkEdit').value;
   perfumes[index].description = document.querySelector('.perfDescrEdit').value; 
-  // localStorage.setItem('data', JSON.stringify(perfumes));
-  // document.location.reload();
+  localStorage.setItem('data', JSON.stringify(perfumes));
+  document.location.reload();
 }
 
 function populateModal(index) {
