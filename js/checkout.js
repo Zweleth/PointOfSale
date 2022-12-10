@@ -7,6 +7,8 @@ else{
     showCartEmpty()
 }
 
+displayTotal();
+
 function showCartEmpty() {
     let checkInfo = document.querySelector(".cart");
     checkInfo.innerHTML += `
@@ -41,7 +43,7 @@ function populateCheckout() {
         `
       }
     });
-    checkInfo.innerHTML += `<div class="dispTotal">0</div>` 
+    checkInfo.innerHTML += `<div class="dispTotal">Total R 0</div>` 
   }
 
 
@@ -61,6 +63,7 @@ function addQty(qty, id) {
     checkout[id].qty=qty;
     localStorage.setItem('cart', JSON.stringify(checkout));
     document.location.reload();
+    displayTotal();
 }
 
 btnMinQty.forEach(btn => {
@@ -83,18 +86,32 @@ function minQty(qty, id) {
     }
     localStorage.setItem('cart', JSON.stringify(checkout));
     document.location.reload();
+    displayTotal();
     
 }
 
+function displayTotal() {
+    let total = 0;
+    checkout.forEach(chk => {
+        total += chk.price * chk.qty;
+         
+    })
+    document.querySelector('.dispTotal').innerHTML = `Total R ${total.toFixed(2)}`;
+    
+}
+
+
+
 // function calculateTotal() {
 //     let total = 0;
-//     let i = 0;
-//     checkout.forEach(() => {
-//         total += (checkout[i].price*checkout[i].qty)
+//     checkout.forEach((chk) => {
+//         total += (checkout[chk].price*checkout[chk].qty)
 //         document.querySelector('.despTotal').innerHTML = total;
 //         alert(total)
 //         i++;
 //     })
 // }
+
+
 
 

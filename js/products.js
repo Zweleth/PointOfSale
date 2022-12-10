@@ -186,13 +186,13 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 5rem;
+            padding-top: 3rem;
             padding-bottom: 1rem;
             padding-right: 2rem;
             padding-left: 2rem;
             background-color: ${colors[i].bgColor};
             color: ${colors[i].color}">
-                <h5 style="margin-bottom: 2rem; ">${perfumes[i].name}</h5>
+                <h5 style="margin-bottom: 1rem; ">${perfumes[i].name}</h5>
                 <div class="img" style="background-image: url(${perfumes[i].image_link}); width: 100%;
                 height: 25rem;
                 
@@ -203,10 +203,10 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
                 align-items:center">
                     <img src="${perfumes[i].image_link}" style="width:90%"; height: 20rem;>
                 </div>
-                <h6 style="margin-top: 1rem;" >Price: R ${perfumes[i].price}</h6>
-                <h6 style="margin-top: 1rem;">${perfumes[i].description}</h6>
+                <h6 style="margin-top: 0.5rem;" >Price: R ${perfumes[i].price}</h6>
+                <h6 style="margin-top: 0.5rem;">${perfumes[i].description}</h6>
                 <div class="btnAddToCart style="width: 100%; height: 4rem;">
-                    <button class="btn" id="${perfumes[i].id}"style="margin-top: 3.5rem;
+                    <button class="btn" id="${perfumes[i].id}"style=" margin-top: 1.5rem;
                     width: 10rem;
                     height: 3rem;
                     border: none;
@@ -227,13 +227,13 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 5rem;
+            padding-top: 3rem;
             padding-bottom: 1rem;
             padding-right: 2rem;
             padding-left: 2rem;
             background-color: ${colors[i].bgColor};
             color: ${colors[i].color}">
-                <h5 style="margin-bottom: 2rem; ">${perfumes[i].name}</h5>
+                <h5 style="margin-bottom: 1rem; ">${perfumes[i].name}</h5>
                 <div class="img" style="background-image: url(${perfumes[i].image_link}); width: 100%;
                 height: 25rem;
                 
@@ -244,10 +244,10 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
                 align-items:center">
                     <img src="${perfumes[i].image_link}" style="width:90%"; height: 20rem;>
                 </div>
-                <h6 style="margin-top: 1rem;" >Price: R ${perfumes[i].price}</h6>
-                <h6 style="margin-top: 1rem;">${perfumes[i].description}</h6>
+                <h6 style="margin-top: 0.5rem;" >Price: R ${perfumes[i].price}</h6>
+                <h6 style="margin-top: 0.5rem;">${perfumes[i].description}</h6>
                 <div class="btnAddToCart style="width: 100%; height: 4rem;">
-                    <button class="btn" id="${perfumes[i].id}"style="margin-top: 3.5rem;
+                    <button class="btn" id="${perfumes[i].id}"style="margin-top: 1.5rem;
                     width: 10rem;
                     height: 3rem;
                     border: none;
@@ -294,7 +294,8 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
 
     function addItemToCart(i) {
         if (cartItems.includes(perfumes[i])) {
-
+            perfumes[i].qty+= 1;
+            localStorage.setItem('cart', JSON.stringify(cartItems));
         }
         else {
             perfumes[i].qty= 1;
@@ -302,6 +303,29 @@ let cartItems = JSON.parse(localStorage.getItem("cart"))
             localStorage.setItem('cart', JSON.stringify(cartItems));
         }
    }
+   let perfume = document.querySelector('.searchPrice')
+   let newPerfumes = document.querySelector('.perfumes')
+   perfume.addEventListener("keydown", () => {
+        searchByName();
+   })
+
+   function searchByName() {
+        try {
+            if (!perfume.value.length) throw "Enter name of perfume";
+            perfumes = perfumes.filter((perfs) => {
+                return perfs.name.toLowerCase().includes(perfume.value.toLowerCase());
+            });
+            if (!perfumes.length) throw "";     
+        }
+        catch (data) {
+            newPerfumes.innerHTML = data;
+
+        }
+        displayProducts();
+   }
+
+
+
    
     // ====================================================================================================
 

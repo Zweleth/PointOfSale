@@ -1,6 +1,7 @@
 
 let perfumes = JSON.parse(localStorage.getItem("data"))
 
+
 closeEditModal()
 
 function populateTable() {
@@ -64,14 +65,16 @@ btnDelete.forEach(btn => {
 
 function deletePerfume(index) {
   perfumes.splice((index-1),1)
-  for(i=0; i< perfumes.length; i++) {
-    perfumes[i].id = eval(`${[i]} + 1`);
-  }
+  fixIDs();
   localStorage.setItem('data', JSON.stringify(perfumes));
   document.location.reload();
 }
 
-
+function fixIDs() {
+  for(i=0; i< perfumes.length; i++) {
+    perfumes[i].id = eval(`${[i]} + 1`);
+  }
+}
 function addNewPerfume() {
   let newPerfume = {
   id: perfumes.length+1,
@@ -152,3 +155,39 @@ function showEditModal() {
 function closeEditModal() {
   document.querySelector('.pop-upEdit').id= 'hideModal';
 }
+
+let btnSortName = document.querySelector('.sortName');
+btnSortName.addEventListener('click', () => {
+  sortByName();
+})
+
+let btnSortPrice = document.querySelector('.sortPrice');
+btnSortPrice.addEventListener('click', () => {
+  sortByPrice();
+})
+
+function sortByName() {
+    perfumes.sort(function(a, b) {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    })
+  fixIDs();
+  localStorage.setItem('data', JSON.stringify(perfumes));
+  document.location.reload();
+}
+
+function sortByPrice() {
+  perfumes.sort(function(a, b) {
+    if (a.price < b.price) return -1;
+    if (a.price > b.price) return 1;
+    return 0;
+  })
+fixIDs();
+localStorage.setItem('data', JSON.stringify(perfumes));
+document.location.reload();
+}
+
+// function startSlide() {
+//   switch
+// }
